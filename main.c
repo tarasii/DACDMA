@@ -111,11 +111,9 @@ int main(void){
     DAC_InitStructure.DAC_WaveGeneration = DAC_WaveGeneration_None;
     DAC_InitStructure.DAC_OutputBuffer = DAC_OutputBuffer_Disable;
     DAC_Init(DAC_Channel_1, &DAC_InitStructure);
-    DAC_Init(DAC_Channel_2, &DAC_InitStructure);
- 
+
     DAC_Cmd(DAC_Channel_1, ENABLE);
-    DAC_Cmd(DAC_Channel_2, ENABLE);
- 
+
     DAC_DMACmd(DAC_Channel_1, ENABLE);
  
     TIM_Cmd(TIM2, ENABLE);	
