@@ -1,7 +1,7 @@
 Dependencies for Project 'DACDMA', Target 'Target 1': (DO NOT MODIFY !)
 F (.\startup_stm32l1xx_md.s)(0x4F587C08)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --apcs=interwork --pd "__MICROLIB SETA 1"-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32L1xx--list .\obj\startup_stm32l1xx_md.lst --xref -o .\obj\startup_stm32l1xx_md.o --depend .\obj\startup_stm32l1xx_md.d)
-F (.\main.c)(0x5510F108)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I..\STM32L1xx_StdPeriph_Driver\inc -I..\Board -I.\ -I..\..\..\..\INC\ST\STM32L1xx-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32L1xx-DSTM32L15XXB_128K -DUSE_STDPERIPH_DRIVER-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
-I (main.h)(0x5510EFFD)
+F (.\main.c)(0x5511DC88)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I..\STM32L1xx_StdPeriph_Driver\inc -I..\Board -I.\ -I..\..\..\..\INC\ST\STM32L1xx-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32L1xx-DSTM32L15XXB_128K -DUSE_STDPERIPH_DRIVER-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+I (main.h)(0x5511B09F)
 I (utils.h)(0x54AD4A72)
 I (..\..\..\..\INC\ST\STM32L1xx\stm32l1xx.h)(0x5495D5DD)
 I (C:\Keil\ARM\CMSIS\Include\core_cm3.h)(0x532C4C22)
@@ -38,6 +38,8 @@ I (leds.h)(0x54AD3DA5)
 I (pin.h)(0x54AD4A6C)
 I (adc.h)(0x54BBFD92)
 I (tim.h)(0x54B916D5)
+I (button.h)(0x54AD4B97)
+I (dac.h)(0x54BBE283)
 F (.\system_stm32l1xx.c)(0x4E69BBE8)(-c --cpu Cortex-M3 -D__EVAL -D__MICROLIB -g -O0 --apcs=interwork -I..\STM32L1xx_StdPeriph_Driver\inc -I..\Board -I.\ -I..\..\..\..\INC\ST\STM32L1xx-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\CMSIS\Include-I C:\Keil\ARM\Inc\ST\STM32L1xx-DSTM32L15XXB_128K -DUSE_STDPERIPH_DRIVER-o .\obj\system_stm32l1xx.o --omf_browse .\obj\system_stm32l1xx.crf --depend .\obj\system_stm32l1xx.d)
 I (..\..\..\..\INC\ST\STM32L1xx\stm32l1xx.h)(0x5495D5DD)
 I (C:\Keil\ARM\CMSIS\Include\core_cm3.h)(0x532C4C22)

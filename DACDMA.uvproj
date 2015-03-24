@@ -421,34 +421,9 @@
               <FilePath>.\system_stm32l1xx.c</FilePath>
             </File>
             <File>
-              <FileName>dht11.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\dht11.c</FilePath>
-            </File>
-            <File>
               <FileName>uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmp085.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\bmp085.c</FilePath>
-            </File>
-            <File>
-              <FileName>onewire.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\onewire.c</FilePath>
-            </File>
-            <File>
-              <FileName>18b20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\18b20.c</FilePath>
             </File>
             <File>
               <FileName>leds.c</FileName>
@@ -459,11 +434,6 @@
               <FileName>adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\rtc.c</FilePath>
             </File>
             <File>
               <FileName>pin.c</FileName>

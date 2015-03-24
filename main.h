@@ -8,7 +8,6 @@
 #include "leds.h"
 #include "adc.h"
 #include "tim.h"
-#include "rtc.h"
 #include "button.h"
 #include "dac.h"
 

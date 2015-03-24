@@ -136,7 +136,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>ST-LINKIII-KEIL_SWO</Key>
-          <Name>-U-O8399 -O8399 -S8 -C0 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO19 -TC10000000 -TP21 -TDS8004 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC800 -FN1 -FF0STM32L1xx_128 -FS08000000 -FL020000</Name>
+          <Name>-U -O8399 -S8 -C0 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO19 -TC10000000 -TP21 -TDS8004 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32L1xx_128 -FS08000000 -FL020000</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -155,11 +155,6 @@
           <count>1</count>
           <WinNumber>1</WinNumber>
           <ItemText>GPIOA-&gt;ODR</ItemText>
-        </Ww>
-        <Ww>
-          <count>2</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>timerValue</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
@@ -207,20 +202,8 @@
       </LogicAnalyzers>
       <SystemViewers>
         <Entry>
-          <Name>System Viewer\DAC</Name>
-          <WinId>35902</WinId>
-        </Entry>
-        <Entry>
-          <Name>System Viewer\DMA</Name>
-          <WinId>35903</WinId>
-        </Entry>
-        <Entry>
           <Name>System Viewer\GPIOA</Name>
           <WinId>35905</WinId>
-        </Entry>
-        <Entry>
-          <Name>System Viewer\TIM2</Name>
-          <WinId>35904</WinId>
         </Entry>
       </SystemViewers>
     </TargetOption>
@@ -254,10 +237,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>75</ColumnNumber>
+      <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>97</CurrentLine>
+      <TopLine>90</TopLine>
+      <CurrentLine>109</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -316,12 +299,12 @@
       <GroupNumber>1</GroupNumber>
       <FileNumber>6</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>278</TopLine>
-      <CurrentLine>291</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\adc.c</PathWithFileName>
       <FilenameWithoutPath>adc.c</FilenameWithoutPath>
@@ -366,10 +349,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>13</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>20</TopLine>
-      <CurrentLine>50</CurrentLine>
+      <TopLine>2</TopLine>
+      <CurrentLine>8</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\dac.c</PathWithFileName>
       <FilenameWithoutPath>dac.c</FilenameWithoutPath>
@@ -384,8 +367,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>28</TopLine>
-      <CurrentLine>26</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\tim.c</PathWithFileName>
       <FilenameWithoutPath>tim.c</FilenameWithoutPath>
@@ -472,8 +455,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>378</TopLine>
-      <CurrentLine>390</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_tim.c</PathWithFileName>
       <FilenameWithoutPath>stm32l1xx_tim.c</FilenameWithoutPath>
@@ -600,8 +583,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>348</TopLine>
-      <CurrentLine>356</CurrentLine>
+      <TopLine>0</TopLine>
+      <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_dac.c</PathWithFileName>
       <FilenameWithoutPath>stm32l1xx_dac.c</FilenameWithoutPath>
