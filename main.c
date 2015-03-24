@@ -116,9 +116,11 @@ int main(void){
 
     DAC_DMACmd(DAC_Channel_1, ENABLE);
  
+    TIM_DMACmd(TIM2, TIM_DMA_Update, ENABLE);
+    
     TIM_Cmd(TIM2, ENABLE);	
 	
-		NVIC_EnableIRQ(TIM2_IRQn);
+		//NVIC_EnableIRQ(TIM2_IRQn);
 		
 
 	while(1)
