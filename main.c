@@ -84,14 +84,15 @@ int main(void){
     TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
     TIM_TimeBaseStructure.TIM_Period = 0x300;
     TIM_TimeBaseStructure.TIM_Prescaler = 0;
-    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    //TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    TIM_TimeBaseStructure.TIM_ClockDivision = 0;
     TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
     TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
  
     TIM_SelectOutputTrigger(TIM2, TIM_TRGOSource_Update);
  
     DMA_DeInit(DMA1_Channel3);
-    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) & DAC->DHR12RD;
+    DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t) & DAC->DHR12R1;
     DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) &dd;
     DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
     DMA_InitStructure.DMA_BufferSize = 28;
