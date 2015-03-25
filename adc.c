@@ -194,6 +194,18 @@ void  writeCalibData(CALIB_TypeDef* calibStruct)
   
 }
 
+void SetCalibData(void){
+  /* Test user or factory temperature sensor calibration value */
+  if ( testUserCalibData() == ENABLE ) calibdata = *USER_CALIB_DATA;
+  else if ( testFactoryCalibData() == ENABLE ) calibdata = *FACTORY_CALIB_DATA;
+  else {
+    calibdata.TS_CAL_COLD = DEFAULT_COLD_VAL;
+    calibdata.TS_CAL_HOT = DEFAULT_HOT_VAL;
+    writeCalibData(&calibdata);
+    calibdata = *USER_CALIB_DATA;
+  }
+}
+
 void adc_init(){
 	
   GPIO_InitTypeDef GPIO_InitStructure; 
@@ -215,16 +227,7 @@ void adc_init(){
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AN;
   GPIO_Init(GPIOC, &GPIO_InitStructure);  
 	
-	
-  /* Test user or factory temperature sensor calibration value */
-  if ( testUserCalibData() == ENABLE ) calibdata = *USER_CALIB_DATA;
-  else if ( testFactoryCalibData() == ENABLE ) calibdata = *FACTORY_CALIB_DATA;
-  else {
-    calibdata.TS_CAL_COLD = DEFAULT_COLD_VAL;
-    calibdata.TS_CAL_HOT = DEFAULT_HOT_VAL;
-    writeCalibData(&calibdata);
-    calibdata = *USER_CALIB_DATA;
-  }
+	SetCalibData();
   
   /* Enable the internal connection of Temperature sensor and with the ADC channels*/
   ADC_TempSensorVrefintCmd(ENABLE); 

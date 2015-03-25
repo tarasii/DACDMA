@@ -59,6 +59,7 @@ uint32_t interquartileMean(uint16_t *array, uint32_t numOfSamples);
 void processTempData(ADC_Typedef* ADC_RES);
 void adc_init(void);
 void configureDMA(void);
+void SetCalibData(void);
 
 uint16_t adc_coretemp_simple(void);
 

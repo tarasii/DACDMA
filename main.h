@@ -22,5 +22,6 @@ void RCC_Configuration(void);
 uint16_t uint16_time_diff(uint16_t now, uint16_t before);
 void setADCDMA_TransferComplete(void);
 void clearADCDMA_TransferComplete(void);
+void DAC_DMA_Config(void);
 
 #endif /* __MAIN_H */
