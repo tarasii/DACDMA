@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define dbl 100
+#define dbl 30
 #define ddl 28
 
 static volatile uint32_t TimingDelay;
@@ -39,21 +39,29 @@ void TIM2_IRQHandler(void)
 		
   }
 
-
 }
 
 void DMA1_Channel1_IRQHandler    (void)
 {
-  DMA_ClearFlag(DMA1_IT_TC1);
-  setADCDMA_TransferComplete();  /* set flag_ADCDMA_TransferComplete global flag */
+  
+	if (DMA_GetFlagStatus(DMA1_IT_TC1)!= RESET)
+	{
+		DMA_ClearFlag(DMA1_IT_TC1);
+		//DMA_ClearFlag(DMA_IT_TC);
+		setADCDMA_TransferComplete();  /* set flag_ADCDMA_TransferComplete global flag */
+		
+		GPIO_TOGGLE(GPIOA,	GPIO_Pin_8);
+	}
 }
 
 
 
 int main(void){
+	int ch_index;
 	ADC_InitTypeDef ADC_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
 	DMA_InitTypeDef DMA_InitStructure;
+        NVIC_InitTypeDef  NVIC_InitStructure;
 
  
 	RCC_Configuration();
@@ -63,73 +71,75 @@ int main(void){
 	
 	pin_mode(GPIOA, GPIO_Pin_9, GPIO_MODE_OUT2_PP);
 	GPIO_HIGH(GPIOA,	GPIO_Pin_9);
+	pin_mode(GPIOA, GPIO_Pin_8, GPIO_MODE_OUT2_PP);
+	GPIO_HIGH(GPIOA,	GPIO_Pin_8);
 	
 	DAC_DMA_Config();
 
 	
-	
-	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);		//enable ADC1 clock
 	pin_mode(GPIOC, GPIO_Pin_3, GPIO_MODE_IN_AN);
+	
+	
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);		
 	
 	SetCalibData();
 	
-  ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div4;
+  ADC_CommonInitStructure.ADC_Prescaler = ADC_Prescaler_Div1;
   ADC_CommonInit(&ADC_CommonInitStructure);
 
 	ADC_StructInit(&ADC_InitStructure);
-  ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;	          			// Set conversion resolution to 12bit
-  ADC_InitStructure.ADC_ScanConvMode = ENABLE;	                          // Enable Scan mode (single conversion for each channel of the group)
-  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;			  							// Disable Continuous conversion
-  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConvEdge_None; // Disable external conversion trigger
-  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;                  // Set conversion data alignement to right
-  ADC_InitStructure.ADC_NbrOfConversion = dbl;             // Set conversion data alignement to ADC_CONV_BUFF_SIZE
+  ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;	          			
+  ADC_InitStructure.ADC_ScanConvMode = ENABLE;	                          
+  ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;			  							
+  ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConvEdge_None; 
+  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;                  
+  ADC_InitStructure.ADC_NbrOfConversion = 1;             
   ADC_Init(ADC1, &ADC_InitStructure);
 	
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 1, ADC_SampleTime_384Cycles);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 2, ADC_SampleTime_384Cycles);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 3, ADC_SampleTime_384Cycles);
-	ADC_RegularChannelConfig(ADC1, ADC_Channel_13, 4, ADC_SampleTime_384Cycles);
+	for (ch_index = 1; ch_index <= dbl; ch_index++){
+		ADC_RegularChannelConfig(ADC1, ADC_Channel_13, ch_index, 
+														 ADC_SampleTime_384Cycles);
+	}
 	
-  /* Enable ADC1 */
   ADC_Cmd(ADC1, ENABLE);
-
-  /* Wait until the ADC1 is ready */
   while(ADC_GetFlagStatus(ADC1, ADC_FLAG_ADONS) == RESET); 
 
   DMA_DeInit(DMA1_Channel1);
   
-  //DMA_InitTypeDef DMA_InitStructure;
-	
-	/* DMA1 channel1 configuration */
   DMA_StructInit(&DMA_InitStructure);
-  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&(ADC1->DR);	     		 // Set DMA channel Peripheral base address to ADC Data register
-  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&db;  // Set DMA channel Memeory base addr to ADC_ConvertedValueBuff address
-  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;                         // Set DMA channel direction to peripheral to memory
-  DMA_InitStructure.DMA_BufferSize = dbl;                     // Set DMA channel buffersize to peripheral to ADC_CONV_BUFF_SIZE
-  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;	     		 // Disable DMA channel Peripheral address auto increment
-  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;                    // Enable Memeory increment (To be verified ....)
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;// set Peripheral data size to 8bit 
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;	     	 // set Memeory data size to 8bit 
-  DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;                              // Set DMA in normal mode
-  DMA_InitStructure.DMA_Priority = DMA_Priority_High;	                     	 // Set DMA channel priority to High
-  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;                               // Disable memory to memory option 
-  DMA_Init(DMA1_Channel1, &DMA_InitStructure);		// Use Init structure to initialise channel1 (channel linked to ADC)
+  DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&(ADC1->DR);	     		 
+  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&db;  
+  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;                         
+  DMA_InitStructure.DMA_BufferSize = dbl;                     
+  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;	     		 
+  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;                    
+  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word; 
+  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;	     	  
+  DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;                              
+  DMA_InitStructure.DMA_Priority = DMA_Priority_High;	                     	 
+  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;                                
+  DMA_Init(DMA1_Channel1, &DMA_InitStructure);		
 
-  /* Enable Transmit Complete Interrup for DMA channel 1 */ 
-  DMA_ITConfig(DMA1_Channel1, DMA_IT_TC, ENABLE);
+  DMA_ITConfig(DMA1_Channel1, DMA1_IT_TC1, ENABLE);
   
+  DMA_Cmd(DMA1_Channel1, ENABLE);
 
   ADC_DMACmd(ADC1, ENABLE);
 
-	NVIC_EnableIRQ(DMA1_Channel1_IRQn);	
-
-  ADC_SoftwareStartConv(ADC1);
+	NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+	
 
 	while(1)
 	{
 	
 		//GPIO_TOGGLE(GPIOA,	GPIO_Pin_9);		
+
+   /* Enable DMA mode for ADC1 */  
+		ADC_DMACmd(ADC1, DISABLE);
+		ADC_DMACmd(ADC1, ENABLE);
+	  clearADCDMA_TransferComplete();
+		ADC_SoftwareStartConv(ADC1);
+		while (!flag_ADCDMA_TransferComplete);			
 		
  		if (uint16_time_diff(systick_ms, toggle_ms) >= 1000) //1 sec delay
  		{
