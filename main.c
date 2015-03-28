@@ -1,6 +1,6 @@
 #include "main.h"
 
-#define dbl 30
+#define dbl 100
 #define ddl 28
 
 static volatile uint32_t TimingDelay;
@@ -8,10 +8,8 @@ RCC_ClocksTypeDef RCC_Clocks;
 
 volatile bool flag_ADCDMA_TransferComplete;
 
-const uint32_t dd[] = {50,100,150,200,250,300,350,400,450,500,550,600,650,700,650,600,550,500,450,400,350,300,250,200,150,100,50,0};
-
-	
-uint32_t db[dbl];
+const uint16_t dd[] = {50,100,150,200,250,300,350,400,450,500,550,600,650,700,650,600,550,500,450,400,350,300,250,200,150,100,50,0};	
+uint16_t db[dbl];
 
 volatile uint16_t systick_ms = 0, toggle_ms = 0;
 
@@ -61,11 +59,8 @@ int main(void){
 	ADC_InitTypeDef ADC_InitStructure;
 	ADC_CommonInitTypeDef ADC_CommonInitStructure;
 	DMA_InitTypeDef DMA_InitStructure;
-        NVIC_InitTypeDef  NVIC_InitStructure;
-
  
 	RCC_Configuration();
-
 
 	led_init();
 	
@@ -73,6 +68,8 @@ int main(void){
 	GPIO_HIGH(GPIOA,	GPIO_Pin_9);
 	pin_mode(GPIOA, GPIO_Pin_8, GPIO_MODE_OUT2_PP);
 	GPIO_HIGH(GPIOA,	GPIO_Pin_8);
+	pin_mode(GPIOA, GPIO_Pin_10, GPIO_MODE_OUT2_PP);
+	GPIO_HIGH(GPIOA,	GPIO_Pin_10);
 	
 	DAC_DMA_Config();
 
@@ -113,8 +110,8 @@ int main(void){
   DMA_InitStructure.DMA_BufferSize = dbl;                     
   DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;	     		 
   DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;                    
-  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word; 
-  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;	     	  
+  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord; 
+  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;	     	  
   DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;                              
   DMA_InitStructure.DMA_Priority = DMA_Priority_High;	                     	 
   DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;                                
@@ -132,9 +129,8 @@ int main(void){
 	while(1)
 	{
 	
-		//GPIO_TOGGLE(GPIOA,	GPIO_Pin_9);		
+		//GPIO_TOGGLE(GPIOA,	GPIO_Pin_10);		
 
-   /* Enable DMA mode for ADC1 */  
 		ADC_DMACmd(ADC1, DISABLE);
 		ADC_DMACmd(ADC1, ENABLE);
 	  clearADCDMA_TransferComplete();
@@ -164,7 +160,8 @@ void DAC_DMA_Config(void){
 	pin_mode(DAC_GPIO, DAC_OUT1, GPIO_MODE_IN_AN);
 
 	TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
-	TIM_TimeBaseStructure.TIM_Period = 0x300;
+	//TIM_TimeBaseStructure.TIM_Period = 0x300;
+	TIM_TimeBaseStructure.TIM_Period = 0x150;
 	TIM_TimeBaseStructure.TIM_Prescaler = 0;
 	TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;
 	//TIM_TimeBaseStructure.TIM_ClockDivision = 0;
@@ -181,7 +178,7 @@ void DAC_DMA_Config(void){
 	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
 	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
 	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Word;
-	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Word;
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
 	DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
 	DMA_InitStructure.DMA_Priority = DMA_Priority_High;
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
@@ -215,7 +212,7 @@ void RCC_Configuration(void){
 
   //SysTick_Config(SystemCoreClock / 4000);
   RCC_GetClocksFreq(&RCC_Clocks);
-  SysTick_Config(RCC_Clocks.HCLK_Frequency / 2000);
+  SysTick_Config(RCC_Clocks.HCLK_Frequency / 2000); //for msec
 
   /* Enable the GPIOs Clock */
   //RCC_AHBPeriphClockCmd(RCC_AHBPeriph_GPIOA | RCC_AHBPeriph_GPIOB | RCC_AHBPeriph_GPIOC| RCC_AHBPeriph_GPIOD| RCC_AHBPeriph_GPIOE| RCC_AHBPeriph_GPIOH, ENABLE);     

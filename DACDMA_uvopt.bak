@@ -144,7 +144,24 @@
           <Name>ULP2CM3(-O207 -S8 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32L1xx_128 -FS08000000 -FL020000)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>142</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134218802</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>.\main.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\dhttocom\main.c\142</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -265,10 +282,10 @@
       <FileType>1</FileType>
       <tvExp>1</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>3</ColumnNumber>
+      <ColumnNumber>26</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>106</TopLine>
-      <CurrentLine>152</CurrentLine>
+      <TopLine>44</TopLine>
+      <CurrentLine>156</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\main.c</PathWithFileName>
       <FilenameWithoutPath>main.c</FilenameWithoutPath>
@@ -331,7 +348,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>10</TopLine>
+      <TopLine>16</TopLine>
       <CurrentLine>38</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\adc.c</PathWithFileName>
@@ -377,9 +394,9 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>17</ColumnNumber>
+      <ColumnNumber>19</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>15</TopLine>
+      <TopLine>24</TopLine>
       <CurrentLine>50</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>.\dac.c</PathWithFileName>
@@ -547,7 +564,7 @@
       <Focus>0</Focus>
       <ColumnNumber>28</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>521</TopLine>
+      <TopLine>522</TopLine>
       <CurrentLine>528</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\STM32L1xx_StdPeriph_Driver\src\stm32l1xx_dma.c</PathWithFileName>
